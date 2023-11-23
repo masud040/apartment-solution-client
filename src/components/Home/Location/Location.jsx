@@ -1,11 +1,21 @@
-import { FaStar } from "react-icons/fa6";
+import {
+  FaFacebook,
+  FaLinkedin,
+  FaLocationDot,
+  FaMobile,
+  FaStar,
+  FaTwitter,
+} from "react-icons/fa6";
+import { IoIosCall } from "react-icons/io";
+import { MdEmail } from "react-icons/md";
+
 import map from "../../../assets/images/location.webp";
 import SectionTitle from "../../SectionTitle/SectionTitle";
 const Location = () => {
   return (
     <div>
       <SectionTitle title="Location" />
-      <div className="flex items-center gap-6">
+      <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="relative md:w-2/3">
           <img className="w-full h-[300px]" src={map} alt="" />
           <div className="absolute top-2 left-2 bg-white p-3 rounded-lg">
@@ -28,7 +38,44 @@ const Location = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-700">Contact</h1>
+          <h1 className="text-3xl font-bold text-blue-600 mb-6 border-l-4 border-red-500 ps-2">
+            Contact
+          </h1>
+          <div className="flex gap-3 items-center my-8">
+            <img
+              className="w-20 h-20 rounded-full"
+              src="https://i.ibb.co/HGKqCXb/4.jpg"
+              alt=""
+            />
+            <div>
+              <h1 className="text-lg font-semibold">Rifa Ahmed</h1>
+              <span className="flex gap-2 text-2xl">
+                <FaFacebook className=" text-blue-600" />
+                <FaLinkedin className=" text-blue-600" />
+                <FaTwitter className="text-blue-600" />
+              </span>
+            </div>
+          </div>
+          <div className="text-gray-700">
+            <span className="flex items-center gap-3">
+              <FaMobile className="text-xl" />
+              <p>012345667788</p>
+            </span>
+            <span className="flex items-center gap-3">
+              <IoIosCall className="text-xl" />
+              <p>333345667788</p>
+            </span>
+            <span className="flex items-center gap-3">
+              <MdEmail className="text-xl" />
+              <p>example@.com</p>
+            </span>
+            <span className="flex items-center gap-3">
+              <FaLocationDot className="text-xl" />
+              <p>
+                Apartment C-3, Road 4, Block - A, Gulshan Dhaka 1213, Bangladesh
+              </p>
+            </span>
+          </div>
         </div>
       </div>
     </div>
