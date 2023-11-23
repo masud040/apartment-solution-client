@@ -61,14 +61,18 @@ const MenuDropdown = () => {
             </Link>
             {user ? (
               <>
-                <p>{user.displayName}</p>
+                <p className="px-4  py-2 hover:bg-neutral-100 transition font-semibold">
+                  {user.displayName}
+                </p>
                 <Link
                   to="/dashboard"
-                  className="block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                  className="px-4 py-2 hover:bg-neutral-100 transition font-semibold"
                 >
                   Dashboard
                 </Link>
-                <button>Logout</button>
+                <button className="px-4 py-2 hover:bg-neutral-100 transition font-semibold text-start">
+                  Logout
+                </button>
               </>
             ) : (
               <>
