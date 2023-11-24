@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
 const ApartmentCard = ({ apartment }) => {
   const { image, floor_no, block_name, apartment_no, rent } = apartment || {};
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const apartmentBooking = async () => {
+    setIsLoading(true);
     const bookingRoom = {
       name: user.displayName,
       email: user.email,
@@ -15,7 +21,17 @@ const ApartmentCard = ({ apartment }) => {
       rent,
       status: "pending",
     };
-    console.log(bookingRoom);
+    const { data } = await axiosSecure.post("/agreements", bookingRoom);
+    if (data.insertedId) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Apartment Agreement Added",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setIsLoading(false);
+    }
   };
   return (
     <div className="col-span-1 cursor-pointer group">
@@ -63,9 +79,11 @@ const ApartmentCard = ({ apartment }) => {
           onClick={apartmentBooking}
           className="text-center hover:bg-rose-400 p-2 hover:text-white text-lg 
         text-rose-500 border border-rose-400
-        font-semibold rounded-md  transition-all shadow-md"
+        font-semibold rounded-md   transition-all shadow-md"
         >
-          <button>Agreement</button>
+          <button>
+            {isLoading ? <FaSpinner className=" animate-spin" /> : "Agreement"}
+          </button>
         </div>
       </div>
     </div>
