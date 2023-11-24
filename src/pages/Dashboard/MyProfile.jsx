@@ -13,7 +13,8 @@ const MyProfile = () => {
       return data;
     },
   });
-  const { floor_no, block_name, apartment_no, rent, status } = agreement || {};
+  const { floor_no, block_name, date, apartment_no, rent, status } =
+    agreement || {};
 
   return (
     <div className="text-gray-700 flex justify-evenly flex-col lg:flex-row gap-8 ">
@@ -38,7 +39,7 @@ const MyProfile = () => {
       {status === "checked" && (
         <div className="shadow-2xl w-96  flex flex-col items-start p-6  bg-blue-100 rounded-xl space-y-2">
           <h2 className="text-pink-600 font-bold text-xl">
-            Agreement Accepted{" "}
+            Agreement Accepted on {date.split(":")[0]}
           </h2>
           <h2 className="text-xl font-semibold">Rented Apartment Info</h2>
           <span className="flex items-center text-lg font-semibold gap-2">

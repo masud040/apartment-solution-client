@@ -25,6 +25,29 @@ const AgreementCard = ({ agreement }) => {
       refetch();
     }
   };
+  const handleReject = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosSecure.delete(`/agreements/${id}`);
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Rejected!",
+            text: "This agreement is Rejected.",
+            icon: "success",
+          });
+          refetch();
+        }
+      }
+    });
+  };
   return (
     <div className="font-semibold text-lg shadow-2xl p-6 rounded-xl bg-blue-100">
       <span className="flex items-center gap-2  ">
@@ -57,7 +80,10 @@ const AgreementCard = ({ agreement }) => {
             Accept
           </span>
         </button>
-        <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+        <button
+          onClick={() => handleReject(_id)}
+          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
           Reject
         </button>
       </div>
