@@ -6,6 +6,9 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/NotFound/NotFound";
+import Dashboard from "../Layouts/DashboardLayour/Dashboard";
+import MyProfile from "../pages/Dashboard/MyProfile";
+import Announcement from "../pages/Dashboard/Announcement";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,24 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "my-profile",
+        element: <MyProfile />,
+      },
+      {
+        path: "announcement",
+        element: <Announcement />,
+      },
+    ],
   },
 ]);
 export default router;

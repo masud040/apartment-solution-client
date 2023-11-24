@@ -12,7 +12,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
@@ -64,7 +63,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        axiosPublic.post("/jwt");
+        axiosPublic.post("/jwt", loggedUser);
       } else {
         axiosPublic("/logout");
       }

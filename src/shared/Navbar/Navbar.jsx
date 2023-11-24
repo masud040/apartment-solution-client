@@ -15,7 +15,7 @@ const Navbar = () => {
                 to="/"
                 className="bg-gradient-to-r from-blue-600 via-green-500 text-2xl font-bold to-indigo-400 inline-block text-transparent bg-clip-text"
               >
-                Real Estate
+                Diamond House
               </Link>
             </div>
 
