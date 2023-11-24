@@ -13,7 +13,7 @@ import map from "../../../assets/images/location.webp";
 import SectionTitle from "../../SectionTitle/SectionTitle";
 const Location = () => {
   return (
-    <div>
+    <div className="my-14">
       <SectionTitle title="Location" />
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="relative md:w-2/3">

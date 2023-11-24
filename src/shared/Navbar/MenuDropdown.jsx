@@ -4,11 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 
 import placeholder from "../../assets/images/placeholder.jpg";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 const MenuDropdown = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
-
+  const handleLogout = async () => {
+    await logOut();
+    toast.success("Logged out");
+  };
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -70,7 +74,10 @@ const MenuDropdown = () => {
                 >
                   Dashboard
                 </Link>
-                <button className="px-4 py-2 hover:bg-neutral-100 transition font-semibold text-start">
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 hover:bg-neutral-100 transition font-semibold text-start"
+                >
                   Logout
                 </button>
               </>

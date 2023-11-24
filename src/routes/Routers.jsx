@@ -4,11 +4,14 @@ import Home from "../pages/Home/Home";
 import Apartment from "../pages/Apartment/Apartment";
 import Login from "../pages/Login/Login";
 import Register from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -16,7 +19,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/apartment",
-        element: <Apartment />,
+        element: (
+          <PrivateRoute>
+            <Apartment />
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:5000/apartments"),
       },
     ],
   },
