@@ -19,6 +19,7 @@ const ApartmentCard = ({ apartment }) => {
       block_name,
       apartment_no,
       rent,
+      date: new Date(),
       status: "pending",
     };
     const { data } = await axiosSecure.post("/agreements", bookingRoom);

@@ -22,7 +22,7 @@ const SignUp = () => {
     const user = {
       name,
       email,
-      role: "admin",
+      role: "user",
     };
     const storeUser = await saveUser(user);
     if (storeUser.acknowledged) {
