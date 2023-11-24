@@ -1,10 +1,23 @@
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 const UserDataRow = ({ user, index, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const handleRemove = async (email) => {
-    const { data } = await axiosSecure.patch(`/user/${email}`);
-    console.log(data);
+    const update = {
+      role: "user",
+    };
+    const { data } = await axiosSecure.patch(`/user/${email}`, update);
+    if (data.modifiedCount > 0) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Removed Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      refetch();
+    }
   };
   return (
     <tr className="">
