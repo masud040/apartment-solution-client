@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { saveImage, saveUser } from "../../api/utils";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
+
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,7 +25,10 @@ const SignUp = () => {
       role: "admin",
     };
     const storeUser = await saveUser(user);
-    console.log(storeUser);
+    if (storeUser.acknowledged) {
+      toast.success("Sign up successfully");
+      navigate("/");
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-screen">

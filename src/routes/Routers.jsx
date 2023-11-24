@@ -9,6 +9,14 @@ import NotFound from "../pages/NotFound/NotFound";
 import Dashboard from "../Layouts/DashboardLayour/Dashboard";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import Announcement from "../pages/Dashboard/Announcement";
+import MakePayment from "../pages/Dashboard/Member/MakePayment";
+import PaymentHistory from "../pages/Dashboard/Member/PaymentHistory";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import ManageMember from "../pages/Dashboard/Admin/ManageMember";
+import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
+import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
+import MemberRoute from "./MemberRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -52,8 +60,56 @@ const router = createBrowserRouter([
         element: <MyProfile />,
       },
       {
-        path: "announcement",
+        path: "announcements",
         element: <Announcement />,
+      },
+      {
+        path: "payment",
+        element: (
+          <MemberRoute>
+            <MakePayment />
+          </MemberRoute>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <MemberRoute>
+            <PaymentHistory />
+          </MemberRoute>
+        ),
+      },
+      {
+        path: "admin-profile",
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-members",
+        element: (
+          <AdminRoute>
+            <ManageMember />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "make-announcement",
+        element: (
+          <AdminRoute>
+            <MakeAnnouncement />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "agreements",
+        element: (
+          <AdminRoute>
+            <AgreementRequest />
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -12,8 +12,8 @@ const UserRoutes = () => {
       />
       <MenuItem
         icon={IoAlertCircle}
-        label="Announcement"
-        address="/dashboard/announcement"
+        label="Announcements"
+        address="/dashboard/announcements"
       />
     </>
   );

@@ -63,11 +63,20 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        axiosPublic.post("/jwt", loggedUser);
+        axiosPublic
+          .post("http://localhost:5000/jwt", loggedUser)
+          .then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("access_token", res.data.token);
+              setLoading(false);
+            }
+          });
       } else {
-        axiosPublic("/logout");
+        localStorage.removeItem("access_token");
+        setLoading(false);
       }
     });
+
     return () => {
       return unsubscribe();
     };

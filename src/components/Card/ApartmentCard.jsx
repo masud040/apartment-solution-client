@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 const ApartmentCard = ({ apartment }) => {
   const { image, floor_no, block_name, apartment_no, rent } = apartment || {};
+  const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
   const apartmentBooking = async () => {
     const bookingRoom = {

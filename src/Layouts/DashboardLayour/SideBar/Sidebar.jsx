@@ -5,9 +5,13 @@ import { AiOutlineBars } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
 import UserRoutes from "./UserRoutes";
+import MemberRoutes from "./MemberRoutes";
+import AdminRoutes from "./AdminRoutes";
+import useRole from "../../../hooks/useRole";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const [role, isPending] = useRole();
 
   //   For guest/host menu item toggle button
 
@@ -54,7 +58,9 @@ const Sidebar = () => {
             {/* If a user is host */}
 
             <nav>
-              <UserRoutes />
+              {role?.role === "user" && <UserRoutes />}
+              {role?.role === "member" && <MemberRoutes />}
+              {role?.role === "admin" && <AdminRoutes />}
 
               {/* Menu Items */}
             </nav>

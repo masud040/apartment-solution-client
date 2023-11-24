@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa";
 import MenuItem from "./MenuItem";
 import { MdPayments } from "react-icons/md";
 import { MdOutlinePayments } from "react-icons/md";
+import { IoAlertCircle } from "react-icons/io5";
 
 const MemberRoutes = () => {
   return (
@@ -20,6 +21,11 @@ const MemberRoutes = () => {
         icon={MdOutlinePayments}
         label="Payment History"
         address="/dashboard/payment-history"
+      />
+      <MenuItem
+        icon={IoAlertCircle}
+        label="Announcements"
+        address="/dashboard/announcements"
       />
     </>
   );
