@@ -4,10 +4,14 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
 const CheckOut = ({ paymentInfo }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -36,10 +40,8 @@ const CheckOut = ({ paymentInfo }) => {
       card,
     });
     if (error) {
-      console.log("payment error", error);
       setError(error.message);
     } else {
-      console.log("paymentMethod", paymentMethod);
       setError("");
     }
     // confirm card payment
@@ -56,16 +58,8 @@ const CheckOut = ({ paymentInfo }) => {
     if (confirmError) {
       console.log("confirm error");
     } else {
-      console.log("paymentIntent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Payment Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
         const payment = {
           email: user?.email,
           price: price,
@@ -74,7 +68,17 @@ const CheckOut = ({ paymentInfo }) => {
           agreementId: paymentInfo.agreementId,
           month_of_rent: paymentInfo.month,
         };
-        console.log(payment);
+        const { data } = await axiosSecure.post("/payments", payment);
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Payment Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/dashboard/payment-history");
+        }
       }
     }
   };

@@ -13,7 +13,7 @@ const ManageMember = () => {
   });
 
   return (
-    <div className="overflow-x-scroll">
+    <div className="overflow-x-auto">
       <table className="w-full ">
         <thead>
           <tr>

@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
-import axios from "axios";
 
 import ApartmentCard from "../../components/Card/ApartmentCard";
 import Container from "../../components/Container/Container";
