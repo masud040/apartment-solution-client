@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import AgreementCart1 from "../../components/Card/AgreementCart1";
 
 const MyProfile = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { email, displayName, photoURL } = user || {};
   const axiosSecure = useAxiosSecure();
-  const { data: agreement = {} } = useQuery({
-    queryKey: ["agreement"],
+  const { data: agreements = {} } = useQuery({
+    enabled: !loading,
+    queryKey: ["agreements"],
     queryFn: async () => {
-      const { data } = await axiosSecure(`agreement/${user?.email}`);
+      const { data } = await axiosSecure(`agreements/${user?.email}`);
       return data;
     },
   });
-  const { floor_no, block_name, date, apartment_no, rent, status } =
-    agreement || {};
 
   return (
     <div className="text-gray-700 flex justify-evenly flex-col lg:flex-row gap-8 ">
@@ -36,29 +36,12 @@ const MyProfile = () => {
           <h4 className="text-lg font-normal"> {email}</h4>
         </span>
       </div>
-      {status === "checked" && (
-        <div className="shadow-2xl w-96  flex flex-col items-start p-6  bg-blue-100 rounded-xl space-y-2">
-          <h2 className="text-pink-600 font-bold text-xl">
-            Agreement Accepted on {date.split(":")[0]}
-          </h2>
-          <h2 className="text-xl font-semibold">Rented Apartment Info</h2>
-          <span className="flex items-center text-lg font-semibold gap-2">
-            Apartment No: <p className="font-normal">{apartment_no}</p>
-          </span>
-          <span className="flex items-center text-lg font-semibold gap-2">
-            Floor no: <p className="font-normal">{floor_no}</p>
-          </span>
-          <span className="flex items-center text-lg font-semibold gap-2">
-            Block: <p className="font-normal">{block_name}</p>
-          </span>
-          <span className="flex items-center text-lg font-semibold gap-2">
-            Rent:
-            <p className="font-normal">
-              {rent} <small></small>
-            </p>
-          </span>
-        </div>
-      )}
+      <div className="grid lg:grid-cols-3 gap-6">
+        {agreements?.length > 0 &&
+          agreements?.map((agreement) => (
+            <AgreementCart1 key={agreement._id} agreement={agreement} />
+          ))}
+      </div>
     </div>
   );
 };

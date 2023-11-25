@@ -6,13 +6,15 @@ import ApartmentCard from "../../components/Card/ApartmentCard";
 import Container from "../../components/Container/Container";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Apartment = () => {
-  const countData = useLoaderData();
+  const { total } = useLoaderData();
+  const axiosSecure = useAxiosSecure();
 
   const [currentPage, setCurrentPage] = useState(0);
   const perPageItem = 6;
-  const total = countData.total;
+
   const pageCount = Math.ceil(total / perPageItem);
 
   const pages = [...Array(pageCount).keys()];
@@ -20,10 +22,10 @@ const Apartment = () => {
   const { data: apartments = [] } = useQuery({
     queryKey: ["apartment", currentPage, perPageItem],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosSecure.get(
         `http://localhost:5000/apartments?page=${currentPage}&size=${perPageItem}`
       );
-      return res.data?.apartments;
+      return res.data;
     },
   });
   const handleNext = () => {

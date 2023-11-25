@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 const InputField = ({ text, placeHolder }) => {
   return (
-    <div className="mt-2 w-full">
+    <div className=" w-full">
       <label className="block mb-2 text-sm font-medium text-gray-700  ">
         {text}
       </label>

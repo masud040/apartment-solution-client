@@ -4,7 +4,7 @@ import { MdAnnouncement } from "react-icons/md";
 
 const Announcement = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: announcement } = useQuery({
+  const { data: announcement = [] } = useQuery({
     queryKey: ["announcement"],
     queryFn: async () => {
       const { data } = await axiosSecure.get("/announcement");
@@ -14,7 +14,7 @@ const Announcement = () => {
 
   return (
     <div className="space-y-5">
-      {announcement.map((announcement) => (
+      {announcement?.map((announcement) => (
         <div key={announcement._id} className="text-gray-700">
           <div className="flex items-center gap-4">
             <h2 className="text-lg font-bold text-green-500">

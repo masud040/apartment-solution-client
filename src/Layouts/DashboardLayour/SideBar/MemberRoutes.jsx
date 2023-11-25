@@ -15,7 +15,7 @@ const MemberRoutes = () => {
       <MenuItem
         icon={MdPayments}
         label="Make Payment"
-        address="/dashboard/payment"
+        address="/dashboard/make-payment"
       />
       <MenuItem
         icon={MdOutlinePayments}

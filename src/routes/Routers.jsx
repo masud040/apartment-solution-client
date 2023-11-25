@@ -17,6 +17,7 @@ import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
 import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
 import MemberRoute from "./MemberRoute";
 import AdminRoute from "./AdminRoute";
+import Payment from "../pages/Dashboard/Member/Payment";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
             <Apartment />
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/apartments"),
+        loader: () => fetch("http://localhost:5000/apartments-length"),
       },
     ],
   },
@@ -64,10 +65,18 @@ const router = createBrowserRouter([
         element: <Announcement />,
       },
       {
-        path: "payment",
+        path: "make-payment",
         element: (
           <MemberRoute>
             <MakePayment />
+          </MemberRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <MemberRoute>
+            <Payment />
           </MemberRoute>
         ),
       },

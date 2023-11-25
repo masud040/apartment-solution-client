@@ -5,12 +5,23 @@ import Swal from "sweetalert2";
 const AgreementCard = ({ agreement }) => {
   const [agreements, refetch] = useAgreements();
   const axiosSecure = useAxiosSecure();
-  const { _id, name, email, floor_no, block_name, apartment_no, rent, date } =
-    agreement || {};
+  const {
+    _id,
+    name,
+    email,
+    floor_no,
+    block_name,
+    apartment_no,
+    rent,
+    rejected,
+    checked,
+    date,
+  } = agreement || {};
   const handleAccept = async (email) => {
     const update = {
       date: new Date(),
       status: "checked",
+      checked: true,
       role: "member",
     };
     const { data } = await axiosSecure.patch(`/agreements/${email}`, update);
@@ -36,8 +47,13 @@ const AgreementCard = ({ agreement }) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const { data } = await axiosSecure.delete(`/agreements/${id}`);
-        if (data.deletedCount > 0) {
+        const update = {
+          rejected: true,
+          status: "checked",
+        };
+        const { data } = await axiosSecure.patch(`/agreement/${id}`, update);
+
+        if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Rejected!",
             text: "This agreement is Rejected.",
@@ -69,22 +85,32 @@ const AgreementCard = ({ agreement }) => {
         Rent: <h4 className="font-normal">{rent}</h4>
       </span>
       <span className="flex items-center gap-2 ">
-        Request: <h4 className="font-normal">{date.split(":")[0]}</h4>
+        Request: <h4 className="font-normal">{date?.split(":")[0]}</h4>
       </span>
       <div className="flex justify-between mt-4">
         <button
           onClick={() => handleAccept(email)}
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 "
+          className={
+            checked
+              ? "relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg"
+              : "relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-200"
+          }
+          disabled={checked}
         >
           <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0">
-            Accept
+            {checked ? "Accepted" : "Accept"}
           </span>
         </button>
         <button
           onClick={() => handleReject(_id)}
-          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className={
+            rejected
+              ? " relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg bg-white px-5 py-2.5  "
+              : "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          }
+          disabled={rejected}
         >
-          Reject
+          {rejected ? "Rejected" : "Reject"}
         </button>
       </div>
     </div>

@@ -6,7 +6,7 @@ const useAgreements = () => {
   const { data: agreements = [], refetch } = useQuery({
     queryKey: ["agreements"],
     queryFn: async () => {
-      const { data } = await axiosSecure("/agreements?status=pending");
+      const { data } = await axiosSecure("/agreements");
       return data;
     },
   });
