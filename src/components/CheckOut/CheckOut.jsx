@@ -7,9 +7,13 @@ import useAuth from "../../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const CheckOut = ({ paymentInfo }) => {
   const axiosSecure = useAxiosSecure();
+  const [discount, setDiscount] = useState(0);
+  const [coupon, setCoupon] = useState("");
+  const [price, setPrice] = useState(paymentInfo?.rent);
   const { user } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -17,7 +21,7 @@ const CheckOut = ({ paymentInfo }) => {
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const price = paymentInfo?.rent;
+  console.log();
   useEffect(() => {
     price > 0 &&
       axiosSecure.post("/create-payment-intent", { price }).then((res) => {
@@ -82,23 +86,39 @@ const CheckOut = ({ paymentInfo }) => {
       }
     }
   };
+  const handleCoupon = async () => {
+    const { data } = await axiosSecure.get(`/coupon?coupon=${coupon}`);
+
+    const discountPrice = price * (data?.discount / 100);
+    data.discount && setDiscount(discountPrice);
+    data.discount && setPrice(paymentInfo?.rent - discountPrice);
+    data.message && toast.error(data.message);
+  };
 
   return (
     <div>
       <h1 className="text-lg font-medium text-center leading-6 text-gray-900">
         Payment
       </h1>
+      <div className="text-end text-gray-700 font-semibold">
+        <h4>Total Price: {paymentInfo?.rent}</h4>
+        <h4 className="mb-2">Discount: {discount}</h4>
+        <hr />
+        <h4>SubTotal: {price}</h4>
+      </div>
       <div>
         <div className="my-4">
           <label className="text-gray-500  font-semibold">Coupon</label>
           <input
-            type="number"
-            name=""
-            id=""
+            type="text"
+            onBlur={(e) => setCoupon(e.target.value)}
             placeholder="coupon"
             className="w-full p-2 my-3 border border-gray-300  rounded-lg focus:outline-none"
           />
-          <button className="bg-rose-400 rounded-lg p-1">Apply</button>
+
+          <button onClick={handleCoupon} className="bg-rose-400 rounded-lg p-1">
+            Apply
+          </button>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
@@ -119,7 +139,7 @@ const CheckOut = ({ paymentInfo }) => {
           }}
         />
         <button
-          className="w-full disabled:text-red-500 bg-purple-400 mt-4 rounded-lg p-1"
+          className="w-full disabled:bg-gray-200 bg-purple-400 mt-4 rounded-lg p-1 font-semibold"
           type="submit"
           disabled={!stripe || !clientSecret}
         >

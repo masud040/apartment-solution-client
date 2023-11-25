@@ -6,7 +6,9 @@ const SectionTitle = ({ title, subtitle }) => {
         {title}
       </h2>
 
-      <p className="text-lg mt-6 text-gray-700 ">{subtitle}</p>
+      <p className="text-lg mt-2 w-[500px] mx-auto text-gray-700 text-sm ">
+        {subtitle}
+      </p>
     </div>
   );
 };
