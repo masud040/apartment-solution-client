@@ -1,4 +1,4 @@
-https://6562f17de348be41a14d5276--guileless-gaufre-2bf86d.netlify.app
+https://656302e3fdb1c34864781917--super-torrone-00cc08.netlify.app/
 
 ### **Payment Gateway** <br>
 
