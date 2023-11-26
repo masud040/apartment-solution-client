@@ -13,7 +13,7 @@ const CheckOut = ({ paymentInfo }) => {
   const axiosSecure = useAxiosSecure();
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState("");
-  const [price, setPrice] = useState(paymentInfo?.rent);
+  const [price, setPrice] = useState(paymentInfo.rent);
   const { user } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -21,7 +21,7 @@ const CheckOut = ({ paymentInfo }) => {
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  console.log();
+
   useEffect(() => {
     price > 0 &&
       axiosSecure.post("/create-payment-intent", { price }).then((res) => {
@@ -89,7 +89,7 @@ const CheckOut = ({ paymentInfo }) => {
   const handleCoupon = async () => {
     const { data } = await axiosSecure.get(`/coupon?coupon=${coupon}`);
 
-    const discountPrice = price * (data?.discount / 100);
+    const discountPrice = paymentInfo.rent * (data?.discount / 100);
     data.discount && setDiscount(discountPrice);
     data.discount && setPrice(paymentInfo?.rent - discountPrice);
     data.message && toast.error(data.message);
@@ -104,7 +104,7 @@ const CheckOut = ({ paymentInfo }) => {
         <h4>Total Price: {paymentInfo?.rent}</h4>
         <h4 className="mb-2">Discount: {discount}</h4>
         <hr />
-        <h4>SubTotal: {price}</h4>
+        <h4>SubTotal: {price ? price : paymentInfo.rent}</h4>
       </div>
       <div>
         <div className="my-4">

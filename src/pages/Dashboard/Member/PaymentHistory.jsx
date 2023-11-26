@@ -44,7 +44,7 @@ const PaymentHistory = () => {
           </button>
         </form>
       </div>
-      <div className="overflow-x-auto ">
+      <div className="overflow-x-auto mt-6 ">
         <table className="w-full ">
           <thead>
             <tr className="text-sm">
