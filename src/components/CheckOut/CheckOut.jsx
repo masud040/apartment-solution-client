@@ -8,11 +8,13 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { FaSpinner } from "react-icons/fa6";
 
 const CheckOut = ({ paymentInfo }) => {
   const axiosSecure = useAxiosSecure();
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [price, setPrice] = useState(paymentInfo.rent);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ const CheckOut = ({ paymentInfo }) => {
   }, [axiosSecure, price]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (!stripe || !elements) {
       return;
     }
@@ -74,6 +77,7 @@ const CheckOut = ({ paymentInfo }) => {
         };
         const { data } = await axiosSecure.post("/payments", payment);
         if (data.insertedId) {
+          setIsLoading(false);
           Swal.fire({
             position: "center",
             icon: "success",
@@ -138,13 +142,15 @@ const CheckOut = ({ paymentInfo }) => {
             },
           }}
         />
+
         <button
-          className="w-full disabled:bg-gray-200 bg-purple-400 mt-4 rounded-lg p-1 font-semibold"
+          className="w-full mx-auto disabled:bg-gray-200 bg-purple-400 mt-6 rounded-lg p-1 font-semibold "
           type="submit"
           disabled={!stripe || !clientSecret}
         >
-          Pay
+          {isLoading ? <FaSpinner className=" mx-auto animate-spin" /> : "Pay"}
         </button>
+
         <p className="text-red-600 ">{error}</p>
         {transactionId && (
           <p className="text-green-600">Your transaction id {transactionId}</p>
