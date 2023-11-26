@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         axiosPublic
-          .post("http://localhost:5000/jwt", loggedUser)
+          .post("https://building-managment-server.vercel.app/jwt", loggedUser)
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("access_token", res.data.token);

@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 import PaymentCard from "../../../components/Card/PaymentCard";
+import { Helmet } from "react-helmet";
 
 const MakePayment = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,12 +18,17 @@ const MakePayment = () => {
   });
 
   return (
-    <div className="grid lg:grid-cols-2 gap-6">
-      {agreements?.length > 0 &&
-        agreements.map((agreement) => (
-          <PaymentCard key={agreement._id} agreement={agreement} />
-        ))}
-    </div>
+    <>
+      <Helmet>
+        <title>Diamond House | Payment</title>
+      </Helmet>
+      <div className="grid lg:grid-cols-2 gap-6">
+        {agreements?.length > 0 &&
+          agreements.map((agreement) => (
+            <PaymentCard key={agreement._id} agreement={agreement} />
+          ))}
+      </div>
+    </>
   );
 };
 

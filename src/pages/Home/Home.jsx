@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Container from "../../components/Container/Container";
 import Coupons from "../../components/Coupons/Coupons";
 import About from "../../components/Home/About/About";
@@ -6,22 +7,27 @@ import Location from "../../components/Home/Location/Location";
 
 const Home = () => {
   return (
-    <div>
-      <Container>
-        <div>
-          <Banner />
-        </div>
-        <div className="my-20">
-          <About />
-        </div>
-        <div className="my-20">
-          <Coupons />
-        </div>
-        <div>
-          <Location />
-        </div>
-      </Container>
-    </div>
+    <>
+      <Helmet>
+        <title>Diamond House | Home</title>
+      </Helmet>
+      <div>
+        <Container>
+          <div>
+            <Banner />
+          </div>
+          <div className="my-20">
+            <About />
+          </div>
+          <div className="my-20">
+            <Coupons />
+          </div>
+          <div>
+            <Location />
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
 

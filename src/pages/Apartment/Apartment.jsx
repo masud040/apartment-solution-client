@@ -22,7 +22,7 @@ const Apartment = () => {
     queryKey: ["apartment", currentPage, perPageItem],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:5000/apartments?page=${currentPage}&size=${perPageItem}`
+        `https://building-managment-server.vercel.app/apartments?page=${currentPage}&size=${perPageItem}`
       );
       return res.data;
     },

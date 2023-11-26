@@ -37,7 +37,10 @@ const router = createBrowserRouter([
             <Apartment />
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/apartments-length"),
+        loader: () =>
+          fetch(
+            "https://building-managment-server.vercel.app/apartments-length"
+          ),
       },
     ],
   },
@@ -96,7 +99,10 @@ const router = createBrowserRouter([
             <AdminProfile />
           </AdminRoute>
         ),
-        loader: () => fetch("http://localhost:5000/apartments-length"),
+        loader: () =>
+          fetch(
+            "https://building-managment-server.vercel.app/apartments-length"
+          ),
       },
       {
         path: "manage-members",
