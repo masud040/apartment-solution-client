@@ -37,8 +37,7 @@ const ApartmentCard = ({ apartment }) => {
   return (
     <div
       className="col-span-1 cursor-pointer group "
-      data-aos="fade-down"
-      data-aos-easing="linear"
+      data-aos="zoom-in-up"
       data-aos-duration="1500"
     >
       <div className="flex flex-col gap-2 w-full">

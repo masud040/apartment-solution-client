@@ -47,8 +47,8 @@ const Sidebar = () => {
               className="w-full hidden md:flex px-4 py-1 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto"
             >
               <img className="h-10 w-10" src={Logo} alt="" />
-              <h1 className="bg-gradient-to-r from-blue-600 via-green-500 text-xl font-bold to-indigo-400 inline-block text-transparent bg-clip-text">
-                Diamond House
+              <h1 className="bg-gradient-to-r from-blue-600 via-green-500 text-lg font-bold to-indigo-400 inline-block text-transparent bg-clip-text">
+                Apartment solution
               </h1>
             </Link>
           </div>

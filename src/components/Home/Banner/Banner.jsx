@@ -20,22 +20,22 @@ const Banner = () => {
         autoplay={{ delay: 2500 }}
       >
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner2} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner2} alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner3} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner3} alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner1} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner1} alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner4} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner4} alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner5} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner5} alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img className="h-[600px] w-full" src={banner6} alt="" />
+          <img className="h-[400px] md:h-[600px] w-full" src={banner6} alt="" />
         </SwiperSlide>
       </Swiper>
     </div>
