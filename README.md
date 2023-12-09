@@ -1,6 +1,6 @@
 https://656302e3fdb1c34864781917--super-torrone-00cc08.netlify.app/
 ### **Teconology** <br>
-<p>Javascrip, React,Tailwind, Tanstack, Firebase, Expreess, Mongodb, Stripe</p>
+#### **Javascrip, React,Tailwind, Tanstack, Firebase, Expreess, Mongodb, Stripe**
 
 ### **Payment Gateway** <br>
 
