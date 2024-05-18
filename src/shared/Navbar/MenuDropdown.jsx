@@ -1,10 +1,10 @@
-import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
 
+import toast from "react-hot-toast";
 import placeholder from "../../assets/images/placeholder.jpg";
 import useAuth from "../../hooks/useAuth";
-import toast from "react-hot-toast";
 const MenuDropdown = () => {
   const { user, logOut } = useAuth();
 
@@ -17,7 +17,7 @@ const MenuDropdown = () => {
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         {/* Become A Host btn */}
-        <div className="hidden md:flex gap-8 text-lg font-bold">
+        <div className="hidden gap-8 text-lg font-bold md:flex">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -55,28 +55,28 @@ const MenuDropdown = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-14 text-sm">
+        <div className="absolute rounded-b-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-[48px] text-sm">
           <div className="flex flex-col cursor-pointer">
             <Link
               to="/"
-              className="block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+              className="block px-4 py-3 font-semibold transition md:hidden hover:bg-neutral-100"
             >
               Home
             </Link>
             {user ? (
               <>
-                <p className="px-4  py-2 hover:bg-neutral-100 transition font-semibold">
+                <p className="px-4 py-2 font-semibold transition hover:bg-neutral-100">
                   {user.displayName}
                 </p>
                 <Link
                   to="/dashboard"
-                  className="px-4 py-2 hover:bg-neutral-100 transition font-semibold"
+                  className="px-4 py-2 font-semibold transition hover:bg-neutral-100"
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 hover:bg-neutral-100 transition font-semibold text-start"
+                  className="px-4 py-2 font-semibold transition hover:bg-neutral-100 text-start"
                 >
                   Logout
                 </button>
@@ -85,7 +85,7 @@ const MenuDropdown = () => {
               <>
                 <Link
                   to="/login"
-                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                  className="px-4 py-3 font-semibold transition hover:bg-neutral-100"
                 >
                   Login
                 </Link>

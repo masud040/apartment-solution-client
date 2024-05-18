@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import { saveImage, saveUser } from "../../api/utils";
-import useAuth from "../../hooks/useAuth";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
-import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import toast from "react-hot-toast";
+import { saveImage, saveUser } from "../../api/utils";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -17,9 +17,9 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files;
-    const { data } = await saveImage(image[0]);
+    const data = await saveImage(image[0]);
     await createUser(email, password);
-    await updateUserProfile(name, data.display_url);
+    await updateUserProfile(name, data?.url);
     const user = {
       name,
       email,
@@ -36,8 +36,8 @@ const SignUp = () => {
       <Helmet>
         <title>Diamond House | Login</title>
       </Helmet>
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col max-w-md p-6 text-gray-900 bg-gray-100 rounded-md sm:p-10">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
             <p className="text-sm text-gray-400">Welcome to </p>
@@ -56,7 +56,7 @@ const SignUp = () => {
                   name="name"
                   id="name"
                   placeholder="Enter Your Name Here"
-                  className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-md focus:outline-rose-500"
                   data-temp-mail-org="0"
                 />
               </div>
@@ -82,13 +82,13 @@ const SignUp = () => {
                   id="email"
                   required
                   placeholder="Enter Your Email Here"
-                  className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-md focus:outline-rose-500"
                   data-temp-mail-org="0"
                 />
               </div>
               <div>
                 <div className="flex justify-between">
-                  <label htmlFor="password" className="text-sm mb-2">
+                  <label htmlFor="password" className="mb-2 text-sm">
                     Password
                   </label>
                 </div>
@@ -99,7 +99,7 @@ const SignUp = () => {
                   id="password"
                   required
                   placeholder="*******"
-                  className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                  className="w-full px-3 py-2 text-gray-900 bg-gray-200 border border-gray-300 rounded-md focus:outline-rose-500"
                 />
               </div>
             </div>
@@ -107,7 +107,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                className="bg-rose-500 w-full rounded-md py-3 text-white"
+                className="w-full py-3 text-white rounded-md bg-rose-500"
               >
                 Continue
               </button>
@@ -125,7 +125,7 @@ const SignUp = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="hover:underline hover:text-rose-500 text-gray-600"
+              className="text-gray-600 hover:underline hover:text-rose-500"
             >
               Login
             </Link>

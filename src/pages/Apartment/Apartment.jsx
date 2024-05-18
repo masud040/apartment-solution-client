@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 
-import ApartmentCard from "../../components/Card/ApartmentCard";
-import Container from "../../components/Container/Container";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import ApartmentCard from "../../components/Card/ApartmentCard";
+import Container from "../../components/Container/Container";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Apartment = () => {
@@ -22,7 +22,7 @@ const Apartment = () => {
     queryKey: ["apartment", currentPage, perPageItem],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `https://building-managment-server.vercel.app/apartments?page=${currentPage}&size=${perPageItem}`
+        `http://localhost:5000/apartments?page=${currentPage}&size=${perPageItem}`
       );
       return res.data;
     },

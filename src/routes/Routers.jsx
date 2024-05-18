@@ -1,24 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../Layouts/Main";
-import Home from "../pages/Home/Home";
-import Apartment from "../pages/Apartment/Apartment";
-import Login from "../pages/Login/Login";
-import Register from "../pages/SignUp/SignUp";
-import PrivateRoute from "./PrivateRoute";
-import NotFound from "../pages/NotFound/NotFound";
 import Dashboard from "../Layouts/DashboardLayour/Dashboard";
-import MyProfile from "../pages/Dashboard/MyProfile";
+import Main from "../Layouts/Main";
+import Apartment from "../pages/Apartment/Apartment";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
+import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
+import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
+import ManageMember from "../pages/Dashboard/Admin/ManageMember";
 import Announcement from "../pages/Dashboard/Announcement";
 import MakePayment from "../pages/Dashboard/Member/MakePayment";
-import PaymentHistory from "../pages/Dashboard/Member/PaymentHistory";
-import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
-import ManageMember from "../pages/Dashboard/Admin/ManageMember";
-import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
-import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
-import MemberRoute from "./MemberRoute";
-import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Dashboard/Member/Payment";
-import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
+import PaymentHistory from "../pages/Dashboard/Member/PaymentHistory";
+import MyProfile from "../pages/Dashboard/MyProfile";
+import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import NotFound from "../pages/NotFound/NotFound";
+import Register from "../pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute";
+import MemberRoute from "./MemberRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,10 +37,7 @@ const router = createBrowserRouter([
             <Apartment />
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(
-            "https://building-managment-server.vercel.app/apartments-length"
-          ),
+        loader: () => fetch("http://localhost:5000/apartments-length"),
       },
     ],
   },
@@ -99,10 +96,7 @@ const router = createBrowserRouter([
             <AdminProfile />
           </AdminRoute>
         ),
-        loader: () =>
-          fetch(
-            "https://building-managment-server.vercel.app/apartments-length"
-          ),
+        loader: () => fetch("http://localhost:5000/apartments-length"),
       },
       {
         path: "manage-members",

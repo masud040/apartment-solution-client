@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,6 +9,8 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import PropTypes from "prop-types";
+import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         axiosPublic
-          .post("https://building-managment-server.vercel.app/jwt", loggedUser)
+          .post("http://localhost:5000/jwt", loggedUser)
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("access_token", res.data.token);

@@ -15,15 +15,15 @@ const Location = () => {
   return (
     <div className="my-14">
       <SectionTitle title="Location" />
-      <div className="flex flex-col md:flex-row items-center gap-8">
+      <div className="flex flex-col items-center gap-8 md:flex-row">
         <div className="relative md:w-2/3">
           <img className="w-full h-[300px]" src={map} alt="" />
-          <div className="absolute top-2 left-2 bg-white p-3 rounded-lg">
+          <div className="absolute p-3 bg-white rounded-lg top-2 left-2">
             <p className="text-lg font-medium">Diamond Manor Building</p>
             <p>Gulshan Dhaka, road-3, NY 11238</p>
             <div className="flex items-center gap-2">
               <p className="text-lg">4.5</p>
-              <div className="flex text-red-400 items-center gap-3">
+              <div className="flex items-center gap-3 text-red-400">
                 <span className="flex ">
                   <FaStar />
                   <FaStar />
@@ -38,20 +38,20 @@ const Location = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-blue-600 mb-6 border-l-4 border-red-500 ps-2">
+          <h1 className="mb-6 text-3xl font-bold text-blue-600 border-l-4 border-red-500 ps-2">
             Contact
           </h1>
-          <div className="flex gap-3 items-center my-8">
+          <div className="flex items-center gap-3 my-8">
             <img
               className="w-20 h-20 rounded-full"
-              src="https://i.ibb.co/HGKqCXb/4.jpg"
+              src="https://res.cloudinary.com/dtoojmthf/image/upload/v1716054022/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508_mtxtkc.avif"
               alt=""
             />
             <div>
               <h1 className="text-lg font-semibold">Rifa Ahmed</h1>
               <span className="flex gap-2 text-2xl">
-                <FaFacebook className=" text-blue-600" />
-                <FaLinkedin className=" text-blue-600" />
+                <FaFacebook className="text-blue-600 " />
+                <FaLinkedin className="text-blue-600 " />
                 <FaTwitter className="text-blue-600" />
               </span>
             </div>
